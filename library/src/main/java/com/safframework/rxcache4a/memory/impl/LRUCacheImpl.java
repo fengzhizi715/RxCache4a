@@ -21,7 +21,11 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
 
         super(maxSize);
 
-        cache = new LruCache<String, Object>(maxSize);
+        long memCacheSize = Runtime.getRuntime().freeMemory() / 8;
+        if (memCacheSize <= 0) {
+            memCacheSize = 1;
+        }
+        cache = new LruCache<String, Object>((int)memCacheSize);
     }
 
     @Override
