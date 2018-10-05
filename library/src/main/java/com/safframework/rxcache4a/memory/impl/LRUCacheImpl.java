@@ -2,6 +2,7 @@ package com.safframework.rxcache4a.memory.impl;
 
 import android.support.v4.util.LruCache;
 
+import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
@@ -28,20 +29,37 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
     @Override
     public <T> CacheHolder<T> getIfPresent(String key) {
 
-        T result = (T) cache.get(key);
-        return result != null ? new CacheHolder<>(result, timestampMap.get(key)) : null;
+        T result = null;
+
+        if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
+
+            result = (T) cache.get(key);
+        } else {
+
+            if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                result = (T) cache.get(key);
+            } else {                     // 缓存的数据已经过期
+
+                evict(key);
+            }
+        }
+
+        return result != null ? new CacheHolder<>(result, timestampMap.get(key), expireTimeMap.get(key)) : null;
     }
 
     @Override
     public <T> void put(String key, T value) {
 
-        cache.put(key,value);
-        timestampMap.put(key,System.currentTimeMillis());
+        put(key, value, Constant.NEVER_EXPIRE);
     }
 
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
+        cache.put(key,value);
+        timestampMap.put(key,System.currentTimeMillis());
+        expireTimeMap.put(key,expireTime);
     }
 
     @Override
@@ -60,11 +78,17 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
     public void evict(String key) {
 
         cache.remove(key);
+
+        timestampMap.remove(key);
+        expireTimeMap.remove(key);
     }
 
     @Override
     public void evictAll() {
 
         cache.evictAll();
+
+        timestampMap.clear();
+        expireTimeMap.clear();
     }
 }
