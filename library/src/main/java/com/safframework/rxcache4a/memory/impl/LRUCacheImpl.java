@@ -40,6 +40,11 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
     }
 
     @Override
+    public <T> void put(String key, T value, long expireTime) {
+
+    }
+
+    @Override
     public Set<String> keySet() {
 
         return cache.snapshot().keySet();
