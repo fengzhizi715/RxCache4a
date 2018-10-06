@@ -1,5 +1,6 @@
 package com.safframework.rxcache4a.persistence;
 
+import com.google.gson.Gson;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.persistence.disk.Disk;
@@ -8,6 +9,7 @@ import com.tencent.mmkv.MMKV;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,17 +22,26 @@ public class MMKVImpl implements Disk {
 
     private String rootDir;
     private MMKV kv = null;
+    private HashMap<String, Long> timestampMap;
+    private HashMap<String, Long> expireTimeMap;
+    private Gson gson;
 
     public MMKVImpl(String rootDir) {
 
         this.rootDir = rootDir;
         this.kv = MMKV.defaultMMKV();
+        this.timestampMap = new HashMap<>();
+        this.expireTimeMap = new HashMap<>();
+        this.gson = new Gson();
     }
 
     public MMKVImpl(String rootDir,String mmkvID) {
 
         this.rootDir = rootDir;
         this.kv = MMKV.mmkvWithID(mmkvID);
+        this.timestampMap = new HashMap<>();
+        this.expireTimeMap = new HashMap<>();
+        this.gson = new Gson();
     }
 
     @Override
@@ -54,9 +65,25 @@ public class MMKVImpl implements Disk {
     @Override
     public <T> CacheHolder<T> retrieve(String key, Type type) {
 
+        T result = null;
 
+        if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
 
-        return null;
+            String json = kv.decodeString(key);
+            gson.fromJson(json, type);
+        } else {
+
+            if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                String json = kv.decodeString(key);
+                gson.fromJson(json, type);
+            } else {                     // 缓存的数据已经过期
+
+                evict(key);
+            }
+        }
+
+        return result != null ? new CacheHolder<>(result, timestampMap.get(key), expireTimeMap.get(key)) : null;
     }
 
     @Override
@@ -68,7 +95,9 @@ public class MMKVImpl implements Disk {
     @Override
     public <T> void save(String key, T value, long expireTime) {
 
-        
+        kv.encode(key,gson.toJson(value));
+        timestampMap.put(key,System.currentTimeMillis());
+        expireTimeMap.put(key,expireTime);
     }
 
     @Override
@@ -86,7 +115,7 @@ public class MMKVImpl implements Disk {
     @Override
     public void evict(String key) {
 
-        kv.remove(key);
+        kv.removeValueForKey(key);
     }
 
     @Override
