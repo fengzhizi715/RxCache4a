@@ -32,7 +32,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation project(':rxcache4a_mmkv')
-    implementation 'com.safframework.rxcache:rxcache-core:0.2.3'
+    implementation 'com.safframework.rxcache:rxcache-core:0.4.1'
     implementation 'com.tencent:mmkv:1.0.10'
 
 }
