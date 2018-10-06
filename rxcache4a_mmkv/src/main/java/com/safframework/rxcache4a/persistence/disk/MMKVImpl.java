@@ -1,4 +1,4 @@
-package com.safframework.rxcache4a.persistence;
+package com.safframework.rxcache4a.persistence.disk;
 
 import com.google.gson.Gson;
 import com.safframework.rxcache.config.Constant;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * @FileName: com.safframework.rxcache4a.persistence.MMKVImpl
+ * @FileName: com.safframework.rxcache4a.persistence.disk.MMKVImpl
  * @author: Tony Shen
  * @date: 2018-10-06 10:37
  * @version: V1.0 <描述当前版本功能>
