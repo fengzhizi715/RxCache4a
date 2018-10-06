@@ -70,13 +70,13 @@ public class MMKVImpl implements Disk {
         if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
 
             String json = kv.decodeString(key);
-            gson.fromJson(json, type);
+            result = gson.fromJson(json, type);
         } else {
 
             if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
                 String json = kv.decodeString(key);
-                gson.fromJson(json, type);
+                result = gson.fromJson(json, type);
             } else {                     // 缓存的数据已经过期
 
                 evict(key);
