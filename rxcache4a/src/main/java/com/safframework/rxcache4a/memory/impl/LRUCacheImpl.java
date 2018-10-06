@@ -3,7 +3,8 @@ package com.safframework.rxcache4a.memory.impl;
 import android.support.v4.util.LruCache;
 
 import com.safframework.rxcache.config.Constant;
-import com.safframework.rxcache.domain.CacheHolder;
+import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
 
 import java.util.Set;
@@ -27,7 +28,7 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
     }
 
     @Override
-    public <T> CacheHolder<T> getIfPresent(String key) {
+    public <T> Record<T> getIfPresent(String key) {
 
         T result = null;
 
@@ -45,7 +46,7 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
             }
         }
 
-        return result != null ? new CacheHolder<>(result, timestampMap.get(key), expireTimeMap.get(key)) : null;
+        return result != null ? new Record<>(Source.MEMORY, key, result, timestampMap.get(key), expireTimeMap.get(key)) : null;
     }
 
     @Override
