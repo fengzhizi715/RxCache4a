@@ -1,11 +1,12 @@
 package com.safframework.rxcache4a.persistence.disk;
 
-import com.google.gson.Gson;
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheHolder;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.persistence.disk.Disk;
+import com.safframework.rxcache.persistence.disk.converter.Converter;
+import com.safframework.rxcache.persistence.disk.converter.GsonConverter;
 import com.tencent.mmkv.MMKV;
 
 import java.lang.reflect.Type;
@@ -21,18 +22,18 @@ import java.util.List;
 public class MMKVImpl implements Disk {
 
     private MMKV kv = null;
-    private Gson gson;
+    private Converter converter;
 
     public MMKVImpl() {
 
         this.kv = MMKV.defaultMMKV();
-        this.gson = new Gson();
+        this.converter = new GsonConverter();
     }
 
-    public MMKVImpl(String mmkvID) {
+    public MMKVImpl(String mmkvID,Converter converter) {
 
         this.kv = MMKV.mmkvWithID(mmkvID);
-        this.gson = new Gson();
+        this.converter = converter;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class MMKVImpl implements Disk {
     @Override
     public <T> Record<T> retrieve(String key, Type type) {
 
-        CacheHolder holder = gson.fromJson(kv.decodeString(key),CacheHolder.class);
+        CacheHolder holder = converter.fromJson(kv.decodeString(key),CacheHolder.class);
 
         long timestamp = holder.timestamp;
         long expireTime = holder.expireTime;
@@ -55,14 +56,14 @@ public class MMKVImpl implements Disk {
 
             String json = holder.data;
 
-            result = gson.fromJson(json,type);
+            result = converter.fromJson(json,type);
         } else {
 
             if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
                 String json = holder.data;
 
-                result = gson.fromJson(json,type);
+                result = converter.fromJson(json,type);
             } else {        // 缓存的数据已经过期
 
                 evict(key);
@@ -84,8 +85,8 @@ public class MMKVImpl implements Disk {
             return;
         }
 
-        CacheHolder holder = new CacheHolder(gson.toJson(value),System.currentTimeMillis(),expireTime);
-        kv.encode(key, gson.toJson(holder));
+        CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime);
+        kv.encode(key, converter.toJson(holder));
     }
 
     @Override
