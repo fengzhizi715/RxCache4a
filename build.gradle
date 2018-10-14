@@ -1,4 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    libraries = [
+
+            rxcache_core                    : "0.4.3"
+    ]
+}
+
 buildscript {
     
     repositories {

@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 
+def libs = rootProject.ext.libraries // 库
+
 android {
     compileSdkVersion 28
 
@@ -32,6 +34,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation 'com.safframework.rxcache:rxcache-core:0.4.3'
+    implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
     implementation 'com.tencent:mmkv:1.0.10'
 }
