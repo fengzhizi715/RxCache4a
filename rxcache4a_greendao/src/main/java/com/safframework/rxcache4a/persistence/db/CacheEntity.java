@@ -2,6 +2,7 @@ package com.safframework.rxcache4a.persistence.db;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * @FileName: com.safframework.rxcache4a.persistence.db.CacheEntity
@@ -18,5 +19,40 @@ public class CacheEntity {
     public String key;
 
     public String value;
+
+    @Generated(hash = 1506971430)
+    public CacheEntity(Long id, String key, String value) {
+        this.id = id;
+        this.key = key;
+        this.value = value;
+    }
+
+    @Generated(hash = 1391258017)
+    public CacheEntity() {
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getKey() {
+        return this.key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
 }
