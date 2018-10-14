@@ -35,4 +35,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
+    implementation 'org.greenrobot:greendao:3.2.2'
 }
