@@ -51,9 +51,11 @@ public class RoomImplTest {
         User u = new User();
         u.name = "tony";
         u.password = "123456";
-        rxCache.save("test",u);
+        u.address = address;
 
-        Record<User> record = rxCache.get("test", User.class);
+        rxCache.save("user",u);
+
+        Record<User> record = rxCache.get("user", User.class);
 
         assertEquals(u.name, record.getData().name);
         assertEquals(u.password, record.getData().password);
