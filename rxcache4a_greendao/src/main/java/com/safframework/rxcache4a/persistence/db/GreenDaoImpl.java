@@ -2,9 +2,11 @@ package com.safframework.rxcache4a.persistence.db;
 
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
+import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.rxcache.persistence.db.DB;
+import com.safframework.tony.common.utils.Preconditions;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -23,8 +25,7 @@ public class GreenDaoImpl implements DB {
 
     public GreenDaoImpl(CacheEntityDao dao) {
 
-        this.dao = dao;
-        this.converter = new GsonConverter();
+        this(dao,new GsonConverter());
     }
 
     public GreenDaoImpl(CacheEntityDao dao, Converter converter) {
@@ -35,7 +36,32 @@ public class GreenDaoImpl implements DB {
 
     @Override
     public <T> Record<T> retrieve(String key, Type type) {
-        return null;
+
+        CacheEntity entity = dao.queryBuilder().where(CacheEntityDao.Properties.Key.eq(key)).unique();
+
+        long timestamp = entity.timestamp;
+        long expireTime = entity.expireTime;
+        T result = null;
+
+        if (expireTime<0) { // 缓存的数据从不过期
+
+            String json = entity.data;
+
+            result = converter.fromJson(json,type);
+        } else {
+
+            if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                String json = entity.data;
+
+                result = converter.fromJson(json,type);
+            } else {        // 缓存的数据已经过期
+
+                evict(key);
+            }
+        }
+
+        return result != null ? new Record<>(Source.PERSISTENCE, key, result, timestamp, expireTime) : null;
     }
 
     @Override
@@ -73,22 +99,20 @@ public class GreenDaoImpl implements DB {
     public boolean containsKey(String key) {
 
         List<String> keys = allKeys();
-        return keys.contains(key);
+
+        return Preconditions.isNotBlank(keys) ? keys.contains(key) : false;
     }
 
     @Override
     public void evict(String key) {
 
-        List<CacheEntity> list = dao.loadAll();
+        CacheEntity entity = dao.queryBuilder().where(CacheEntityDao.Properties.Key.eq(key)).unique();
 
-        for (CacheEntity entity:list) {
+        if (entity!=null) {
 
-            if (key.equals(entity.key)) {
-
-                dao.delete(entity);
-                break;
-            }
+            dao.delete(entity);
         }
+
     }
 
     @Override
