@@ -40,6 +40,7 @@ public class GreenDaoImplTest {
 
         CacheEntityDao dao = dbService.getCacheEntityDao();
         GreenDaoImpl impl = new GreenDaoImpl(dao);
+        impl.evictAll();
 
         RxCache.config(new RxCache.Builder().persistence(impl));
 
