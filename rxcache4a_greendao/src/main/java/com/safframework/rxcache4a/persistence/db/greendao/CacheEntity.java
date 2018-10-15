@@ -18,7 +18,7 @@ public class CacheEntity {
 
     public String key;
 
-    public String data;
+    public String data;// 对象转换的 json 字符串
 
     public Long timestamp;
 
