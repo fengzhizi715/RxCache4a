@@ -7,6 +7,7 @@ import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.rxcache.persistence.disk.Disk;
+import com.safframework.tony.common.utils.Preconditions;
 import com.tencent.mmkv.MMKV;
 
 import java.lang.reflect.Type;
@@ -83,12 +84,11 @@ public class MMKVImpl implements Disk {
     @Override
     public <T> void save(String key, T value, long expireTime) {
 
-        if (value == null) {
-            return;
-        }
+        if (Preconditions.isNotBlanks(key,value)) {
 
-        CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime);
-        kv.encode(key, converter.toJson(holder));
+            CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime);
+            kv.encode(key, converter.toJson(holder));
+        }
     }
 
     @Override
