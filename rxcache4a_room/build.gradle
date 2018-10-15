@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
 
+def libs = rootProject.ext.libraries // 库
+
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 15
@@ -33,6 +33,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     def room_version = "2.1.0-alpha01"
+
+    implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
