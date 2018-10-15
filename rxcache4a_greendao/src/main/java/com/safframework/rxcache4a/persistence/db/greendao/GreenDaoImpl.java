@@ -6,7 +6,6 @@ import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.rxcache.persistence.db.DB;
-import com.safframework.rxcache4a.persistence.db.CacheEntityDao;
 import com.safframework.tony.common.utils.Preconditions;
 
 import java.lang.reflect.Type;
