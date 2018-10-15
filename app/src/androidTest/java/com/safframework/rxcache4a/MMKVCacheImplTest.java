@@ -32,7 +32,7 @@ public class MMKVCacheImplTest {
         // Context of the app under test.
         appContext = InstrumentationRegistry.getTargetContext();
 
-//        assertEquals("com.safframework.rxcache4a", appContext.getPackageName());
+        assertEquals("com.safframework.rxcache4a.demo", appContext.getPackageName());
     }
 
     @Before
