@@ -42,6 +42,12 @@ public class RoomImplTest {
 
         RxCache rxCache = RxCache.getRxCache();
 
+        Address address = new Address();
+        address.province = "Jiangsu";
+        address.city = "Suzhou";
+        address.area = "Gusu";
+        address.street = "ren ming road";
+
         User u = new User();
         u.name = "tony";
         u.password = "123456";
@@ -51,6 +57,12 @@ public class RoomImplTest {
 
         assertEquals(u.name, record.getData().name);
         assertEquals(u.password, record.getData().password);
+        assertEquals(address.city, record.getData().address.city);
+
+        rxCache.save("address",address);
+
+        Record<Address> record2 = rxCache.get("address", Address.class);
+        assertEquals(address.city, record2.getData().city);
     }
 
     @Test
