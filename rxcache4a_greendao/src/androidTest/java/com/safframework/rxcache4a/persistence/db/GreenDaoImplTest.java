@@ -1,4 +1,4 @@
-package com.safframework.rxcache4a;
+package com.safframework.rxcache4a.persistence.db;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -6,7 +6,6 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
-import com.safframework.rxcache4a.demo.User;
 import com.safframework.rxcache4a.persistence.db.greendao.CacheEntityDao;
 import com.safframework.rxcache4a.persistence.db.greendao.DBService;
 import com.safframework.rxcache4a.persistence.db.greendao.GreenDaoImpl;
