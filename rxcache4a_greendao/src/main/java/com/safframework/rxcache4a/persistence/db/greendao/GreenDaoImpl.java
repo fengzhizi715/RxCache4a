@@ -1,4 +1,4 @@
-package com.safframework.rxcache4a.persistence.db;
+package com.safframework.rxcache4a.persistence.db.greendao;
 
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
@@ -6,6 +6,7 @@ import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.persistence.converter.Converter;
 import com.safframework.rxcache.persistence.converter.GsonConverter;
 import com.safframework.rxcache.persistence.db.DB;
+import com.safframework.rxcache4a.persistence.db.CacheEntityDao;
 import com.safframework.tony.common.utils.Preconditions;
 
 import java.lang.reflect.Type;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @FileName: com.safframework.rxcache4a.persistence.db.GreenDaoImpl
+ * @FileName: com.safframework.rxcache4a.persistence.db.greendao.GreenDaoImpl
  * @author: Tony Shen
  * @date: 2018-10-15 11:50
  * @version: V1.0 <描述当前版本功能>

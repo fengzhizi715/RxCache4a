@@ -1,6 +1,10 @@
-package com.safframework.rxcache4a.persistence.db;
+package com.safframework.rxcache4a.persistence.db.greendao;
 
 import android.content.Context;
+
+import com.safframework.rxcache4a.persistence.db.CacheEntityDao;
+import com.safframework.rxcache4a.persistence.db.DaoMaster;
+import com.safframework.rxcache4a.persistence.db.DaoSession;
 
 /**
  * Created by Tony Shen on 2017/7/25.

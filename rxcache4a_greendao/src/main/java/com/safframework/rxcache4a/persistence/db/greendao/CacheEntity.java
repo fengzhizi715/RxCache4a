@@ -1,11 +1,11 @@
-package com.safframework.rxcache4a.persistence.db;
+package com.safframework.rxcache4a.persistence.db.greendao;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * @FileName: com.safframework.rxcache4a.persistence.db.CacheEntity
+ * @FileName: com.safframework.rxcache4a.persistence.db.greendao.CacheEntity
  * @author: Tony Shen
  * @date: 2018-10-15 01:12
  * @version: V1.0 <描述当前版本功能>
