@@ -47,6 +47,8 @@ public class MMKVImpl implements Disk {
 
         CacheHolder holder = converter.fromJson(kv.decodeString(key),CacheHolder.class);
 
+        if (holder==null) return null;
+
         long timestamp = holder.timestamp;
         long expireTime = holder.expireTime;
 

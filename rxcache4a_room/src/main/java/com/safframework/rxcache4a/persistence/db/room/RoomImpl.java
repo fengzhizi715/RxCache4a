@@ -39,6 +39,8 @@ public class RoomImpl implements DB {
 
         CacheEntity entity = db.cacheEntityDao().findByKey(key);
 
+        if (entity==null) return null;
+
         long timestamp = entity.timestamp;
         long expireTime = entity.expireTime;
         T result = null;

@@ -39,6 +39,8 @@ public class GreenDaoImpl implements DB {
 
         CacheEntity entity = dao.queryBuilder().where(CacheEntityDao.Properties.Key.eq(key)).unique();
 
+        if (entity==null) return null;
+
         long timestamp = entity.timestamp;
         long expireTime = entity.expireTime;
         T result = null;
