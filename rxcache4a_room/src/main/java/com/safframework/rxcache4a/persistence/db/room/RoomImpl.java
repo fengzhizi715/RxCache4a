@@ -1,5 +1,7 @@
 package com.safframework.rxcache4a.persistence.db.room;
 
+import android.content.Context;
+
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
@@ -12,6 +14,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.room.Room;
+
 /**
  * @FileName: com.safframework.rxcache4a.persistence.db.room.RoomImpl
  * @author: Tony Shen
@@ -22,15 +26,16 @@ public class RoomImpl implements DB {
 
     private AppDatabase db;
     private Converter converter;
+    private static final String DB_NAME = "cache";
 
-    public RoomImpl(AppDatabase db) {
+    public RoomImpl(Context context) {
 
-        this(db,new GsonConverter());
+        this(context,new GsonConverter());
     }
 
-    public RoomImpl(AppDatabase db,Converter converter) {
+    public RoomImpl(Context context, Converter converter) {
 
-        this.db = db;
+        this.db = Room.databaseBuilder(context, AppDatabase.class, DB_NAME).build();
         this.converter = converter;
     }
 
