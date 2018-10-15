@@ -1,4 +1,4 @@
-package com.safframework.rxcache4a.persistence.db.greendao;
+package com.safframework.rxcache4a.persistence.db.room;
 
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.Record;
@@ -13,31 +13,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @FileName: com.safframework.rxcache4a.persistence.db.greendao.GreenDaoImpl
+ * @FileName: com.safframework.rxcache4a.persistence.db.room.RoomImpl
  * @author: Tony Shen
- * @date: 2018-10-15 11:50
+ * @date: 2018-10-15 16:46
  * @version: V1.0 <描述当前版本功能>
  */
-public class GreenDaoImpl implements DB {
+public class RoomImpl implements DB {
 
-    private CacheEntityDao dao;
+    private AppDatabase db;
     private Converter converter;
 
-    public GreenDaoImpl(CacheEntityDao dao) {
+    public RoomImpl(AppDatabase db) {
 
-        this(dao,new GsonConverter());
+        this(db,new GsonConverter());
     }
 
-    public GreenDaoImpl(CacheEntityDao dao, Converter converter) {
+    public RoomImpl(AppDatabase db,Converter converter) {
 
-        this.dao = dao;
+        this.db = db;
         this.converter = converter;
     }
 
     @Override
     public <T> Record<T> retrieve(String key, Type type) {
 
-        CacheEntity entity = dao.queryBuilder().where(CacheEntityDao.Properties.Key.eq(key)).unique();
+        CacheEntity entity = db.cacheEntityDao().findByKey(key);
 
         long timestamp = entity.timestamp;
         long expireTime = entity.expireTime;
@@ -78,13 +78,13 @@ public class GreenDaoImpl implements DB {
         entity.setTimestamp(System.currentTimeMillis());
         entity.setExpireTime(expireTime);
         entity.setData(converter.toJson(value));
-        dao.save(entity);
+        db.cacheEntityDao().insert(entity);
     }
 
     @Override
     public List<String> allKeys() {
 
-        List<CacheEntity> list = dao.loadAll();
+        List<CacheEntity> list = db.cacheEntityDao().getAll();
 
         List<String> result = new ArrayList<>();
 
@@ -107,18 +107,17 @@ public class GreenDaoImpl implements DB {
     @Override
     public void evict(String key) {
 
-        CacheEntity entity = dao.queryBuilder().where(CacheEntityDao.Properties.Key.eq(key)).unique();
+        CacheEntity entity = db.cacheEntityDao().findByKey(key);
 
         if (entity!=null) {
 
-            dao.delete(entity);
+            db.cacheEntityDao().delete(entity);
         }
-
     }
 
     @Override
     public void evictAll() {
 
-        dao.deleteAll();
+        db.cacheEntityDao().deleteAll();
     }
 }
