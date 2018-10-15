@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * @FileName: com.safframework.rxcache4a.persistence.db.RoomImplTest
@@ -32,9 +33,10 @@ public class RoomImplTest {
     }
 
     @Test
-    public void testObject() {
+    public void testWithObject() {
 
         RoomImpl impl = new RoomImpl(appContext);
+        impl.evictAll();
 
         RxCache.config(new RxCache.Builder().persistence(impl));
 
@@ -49,5 +51,31 @@ public class RoomImplTest {
 
         assertEquals(u.name, record.getData().name);
         assertEquals(u.password, record.getData().password);
+    }
+
+    @Test
+    public void testWithExpireTime() {
+
+        RoomImpl impl = new RoomImpl(appContext);
+        impl.evictAll();
+
+        RxCache.config(new RxCache.Builder().persistence(impl));
+
+        RxCache rxCache = RxCache.getRxCache();
+
+        User u = new User();
+        u.name = "tony";
+        u.password = "123456";
+        rxCache.save("test",u,2000);
+
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Record<User> record = rxCache.get("test", User.class);
+
+        assertNull(record);
     }
 }
