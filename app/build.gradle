@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 def libs = rootProject.ext.libraries // 库
 
@@ -34,7 +35,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation project(':rxcache4a_mmkv')
+    implementation project(':rxcache4a_greendao')
     implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
     implementation 'com.tencent:mmkv:1.0.10'
+    implementation 'org.greenrobot:greendao:3.2.2'
 
 }
