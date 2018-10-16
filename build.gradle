@@ -13,9 +13,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0'
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
-        
+        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+        classpath 'com.novoda:bintray-release:0.8.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -28,8 +28,21 @@ allprojects {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter()
     }
+
+    //加上这些
+    tasks.withType(Javadoc) {
+        options{ encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+tasks.getByPath(":rxcache4a:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rxcache4a_greenDAO:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rxcache4a_mmkv:releaseAndroidJavadocs").enabled = false
+tasks.getByPath(":rxcache4a_room:releaseAndroidJavadocs").enabled = false
