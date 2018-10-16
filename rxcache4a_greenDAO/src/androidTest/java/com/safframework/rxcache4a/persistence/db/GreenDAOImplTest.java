@@ -8,7 +8,7 @@ import com.safframework.rxcache.RxCache;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache4a.persistence.db.greendao.CacheEntityDao;
 import com.safframework.rxcache4a.persistence.db.greendao.DBService;
-import com.safframework.rxcache4a.persistence.db.greendao.GreenDaoImpl;
+import com.safframework.rxcache4a.persistence.db.greendao.GreenDAOImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,13 +18,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- * @FileName: com.safframework.rxcache4a.GreenDaoImplTest
+ * @FileName: com.safframework.rxcache4a.GreenDAOImplTest
  * @author: Tony Shen
  * @date: 2018-10-15 18:51
  * @version: V1.0 <描述当前版本功能>
  */
 @RunWith(AndroidJUnit4.class)
-public class GreenDaoImplTest {
+public class GreenDAOImplTest {
 
     Context appContext;
     DBService dbService;
@@ -39,7 +39,7 @@ public class GreenDaoImplTest {
     public void testWithObject() {
 
         CacheEntityDao dao = dbService.getCacheEntityDao();
-        GreenDaoImpl impl = new GreenDaoImpl(dao);
+        GreenDAOImpl impl = new GreenDAOImpl(dao);
         impl.evictAll();
 
         RxCache.config(new RxCache.Builder().persistence(impl));
@@ -75,7 +75,7 @@ public class GreenDaoImplTest {
     public void testWithExpireTime() {
 
         CacheEntityDao dao = dbService.getCacheEntityDao();
-        GreenDaoImpl impl = new GreenDaoImpl(dao);
+        GreenDAOImpl impl = new GreenDAOImpl(dao);
         impl.evictAll();
 
         RxCache.config(new RxCache.Builder().persistence(impl));

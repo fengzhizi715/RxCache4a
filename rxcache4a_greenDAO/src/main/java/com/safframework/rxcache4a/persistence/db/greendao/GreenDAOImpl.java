@@ -13,22 +13,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @FileName: com.safframework.rxcache4a.persistence.db.greendao.GreenDaoImpl
+ * @FileName: com.safframework.rxcache4a.persistence.db.greendao.GreenDAOImpl
  * @author: Tony Shen
  * @date: 2018-10-15 11:50
  * @version: V1.0 <描述当前版本功能>
  */
-public class GreenDaoImpl implements DB {
+public class GreenDAOImpl implements DB {
 
     private CacheEntityDao dao;
     private Converter converter;
 
-    public GreenDaoImpl(CacheEntityDao dao) {
+    public GreenDAOImpl(CacheEntityDao dao) {
 
         this(dao,new GsonConverter());
     }
 
-    public GreenDaoImpl(CacheEntityDao dao, Converter converter) {
+    public GreenDAOImpl(CacheEntityDao dao, Converter converter) {
 
         this.dao = dao;
         this.converter = converter;
