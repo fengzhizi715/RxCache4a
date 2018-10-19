@@ -1,4 +1,4 @@
-include ':app'
+include ':app', ':rxcache4a_objectbox'
 include ':rxcache4a'
 include ':rxcache4a_mmkv'
 include ':rxcache4a_greenDAO'
