@@ -1,5 +1,7 @@
-include ':app', ':rxcache4a_objectbox'
+include ':app'
 include ':rxcache4a'
 include ':rxcache4a_mmkv'
 include ':rxcache4a_greenDAO'
 include ':rxcache4a_room'
+include ':rxcache4a_objectbox'
+include ':rxcache4a_livedata'
