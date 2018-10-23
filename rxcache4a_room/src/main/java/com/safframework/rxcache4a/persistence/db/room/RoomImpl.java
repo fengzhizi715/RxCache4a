@@ -80,15 +80,12 @@ public class RoomImpl implements DB {
     @Override
     public <T> void save(String key, T value, long expireTime) {
 
-        if (Preconditions.isNotBlanks(key,value)) {
-
-            CacheEntity entity = new CacheEntity();
-            entity.setKey(key);
-            entity.setTimestamp(System.currentTimeMillis());
-            entity.setExpireTime(expireTime);
-            entity.setData(converter.toJson(value));
-            db.cacheEntityDao().insert(entity);
-        }
+        CacheEntity entity = new CacheEntity();
+        entity.setKey(key);
+        entity.setTimestamp(System.currentTimeMillis());
+        entity.setExpireTime(expireTime);
+        entity.setData(converter.toJson(value));
+        db.cacheEntityDao().insert(entity);
     }
 
     @Override

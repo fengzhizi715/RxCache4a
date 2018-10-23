@@ -80,15 +80,12 @@ public class ObjectBoxImpl implements DB {
     @Override
     public <T> void save(String key, T value, long expireTime) {
 
-        if (Preconditions.isNotBlanks(key,value)) {
-
-            CacheEntity entity = new CacheEntity();
-            entity.key = key;
-            entity.timestamp = System.currentTimeMillis();
-            entity.expireTime = expireTime;
-            entity.data = converter.toJson(value);
-            cacheEntityBox.put(entity);
-        }
+        CacheEntity entity = new CacheEntity();
+        entity.key = key;
+        entity.timestamp = System.currentTimeMillis();
+        entity.expireTime = expireTime;
+        entity.data = converter.toJson(value);
+        cacheEntityBox.put(entity);
     }
 
     @Override
