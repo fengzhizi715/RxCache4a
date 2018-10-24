@@ -28,10 +28,13 @@ import java.util.concurrent.TimeUnit
 class LiveDataCacheTest {
 
     lateinit var appContext: Context
+    lateinit var handler: Handler
 
     @Before
     fun setUp() {
         appContext = InstrumentationRegistry.getTargetContext()
+        Looper.prepare()
+        handler = Handler()
     }
 
     @Test
@@ -54,14 +57,22 @@ class LiveDataCacheTest {
 
         rxCache.save("user", u)
 
-        val livedata = rxCache.toLiveData<User>().get("user", User::class.java)
+        val livedata1 = rxCache.toLiveData<User>().get("user", User::class.java)
 
-        Looper.prepare()
-        Handler().post{
+        handler.post{
 
-            val u2 = livedata.blockingObserve()!!
+            val u2 = livedata1.blockingObserve()!!
 
             assertEquals(u.name, u2.name)
+        }
+
+        val livedata2 = rxCache.toLiveData<Address>().save("address",address)
+
+        handler.post{
+
+            val address2 = livedata2.blockingObserve()!!
+
+            assertEquals(address.city, address2.city)
         }
 
     }
