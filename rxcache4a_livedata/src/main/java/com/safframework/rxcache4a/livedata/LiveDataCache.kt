@@ -1,10 +1,10 @@
 package com.safframework.rxcache4a.livedata
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.safframework.rxcache.RxCache
 import com.safframework.rxcache.config.Constant
-import com.safframework.rxcache.domain.Record
 import java.lang.reflect.Type
 
 /**
@@ -15,36 +15,59 @@ import java.lang.reflect.Type
  * @date: 2018-10-23 17:29
  * @version: V1.0 <描述当前版本功能>
  */
-class LiveDataCache(private val cache: RxCache) {
+class LiveDataCache<T>(private val cache: RxCache) {
 
-    fun get(key: String,type:Type): LiveData<Record<Any>> {
+    var mediatorLiveData: MediatorLiveData<T>
 
-        val liveData = MutableLiveData<Record<Any>>()
+    init {
 
-        liveData.postValue(cache.get(key,type))
-
-        return liveData
+        mediatorLiveData = MediatorLiveData<T>()
     }
 
-    fun save(key: String, value: Any): LiveData<Unit> = save(key,value, Constant.NEVER_EXPIRE)
+    fun get(key: String,type:Type): LiveData<T> {
 
-    fun save(key: String, value: Any, expireTime: Long): LiveData<Unit> {
+        val liveData = MutableLiveData<T>()
 
-        val liveData = MutableLiveData<Unit>()
+        liveData.postValue(cache.get<T>(key,type).data)
 
-        liveData.postValue(cache.save(key, value, expireTime))
+        mediatorLiveData.addSource(liveData){
 
-        return liveData
+            mediatorLiveData.postValue(it)
+        }
+
+        return mediatorLiveData
     }
 
-    fun remove(key: String): LiveData<Unit> {
+    fun save(key: String, value: T): LiveData<T> = save(key,value, Constant.NEVER_EXPIRE)
 
-        val liveData = MutableLiveData<Unit>()
+    fun save(key: String, value: T, expireTime: Long): LiveData<T> {
 
-        liveData.postValue(cache.remove(key))
+        val liveData = MutableLiveData<T>()
 
-        return liveData
+        cache.save(key, value, expireTime)
+
+        liveData.postValue(value)
+
+        mediatorLiveData.addSource(liveData){
+
+            mediatorLiveData.postValue(it)
+        }
+
+        return mediatorLiveData
+    }
+
+    fun remove(key: String): LiveData<T> {
+
+        val liveData = MutableLiveData<T>()
+
+        cache.remove(key)
+
+        mediatorLiveData.addSource(liveData){
+            mediatorLiveData.value = null
+        }
+
+        return mediatorLiveData
     }
 }
 
-fun RxCache.toLiveData() = LiveDataCache(this)
+fun <T> RxCache.toLiveData() = LiveDataCache<T>(this)

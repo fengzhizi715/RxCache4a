@@ -23,6 +23,10 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
 }
 
 dependencies {
@@ -33,6 +37,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
     implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.0.0-rc01"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.0.0"
+
 }
