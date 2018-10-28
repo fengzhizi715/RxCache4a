@@ -27,6 +27,9 @@ android {
         exclude 'META-INF/proguard/androidx-annotations.pro'
     }
 
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
