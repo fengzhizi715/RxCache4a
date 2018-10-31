@@ -2,13 +2,13 @@
 ext {
     libraries = [
 
-            rxcache_core                    : "0.5.3"
+            rxcache_core                    : "0.6.1"
     ]
 }
 
 buildscript {
     ext.objectboxVersion = '2.1.0'
-    ext.kotlin_version = '1.2.71'
+    ext.kotlin_version = '1.3.0'
 
     repositories {
         google()
