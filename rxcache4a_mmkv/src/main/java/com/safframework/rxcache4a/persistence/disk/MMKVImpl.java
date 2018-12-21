@@ -55,21 +55,21 @@ public class MMKVImpl implements Disk {
 
         if (holder==null) return null;
 
-        long timestamp = holder.timestamp;
-        long expireTime = holder.expireTime;
+        long timestamp = holder.getTimestamp();
+        long expireTime = holder.getExpireTime();
 
         T result = null;
 
         if (expireTime<0) { // 缓存的数据从不过期
 
-            String json = holder.data;
+            String json = holder.getData();
 
             result = converter.fromJson(json,type);
         } else {
 
             if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
 
-                String json = holder.data;
+                String json = holder.getData();
 
                 result = converter.fromJson(json,type);
             } else {        // 缓存的数据已经过期
@@ -89,7 +89,7 @@ public class MMKVImpl implements Disk {
     @Override
     public <T> void save(String key, T value, long expireTime) {
 
-        CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime);
+        CacheHolder holder = new CacheHolder(converter.toJson(value),System.currentTimeMillis(),expireTime,converter.converterName());
         kv.encode(key, converter.toJson(holder));
     }
 
