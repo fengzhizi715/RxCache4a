@@ -23,7 +23,7 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
 
         super(maxSize);
 
-        int memCacheSize = (int) (Runtime.getRuntime().maxMemory() / (1024*8) );
+        int memCacheSize = (int) (Runtime.getRuntime().maxMemory() / (1024 * 8));
         cache = new LruCache<String, Object>(memCacheSize);
     }
 
@@ -31,21 +31,21 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
     public <T> Record<T> getIfPresent(String key) {
 
         T result = null;
-
-        if (expireTimeMap.get(key)<0) { // 缓存的数据从不过期
-
-            result = (T) cache.get(key);
-        } else {
-
-            if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+        if (expireTimeMap.get(key) != null) {
+            if (expireTimeMap.get(key) < 0) { // 缓存的数据从不过期
 
                 result = (T) cache.get(key);
-            } else {                     // 缓存的数据已经过期
+            } else {
 
-                evict(key);
+                if (timestampMap.get(key) + expireTimeMap.get(key) > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                    result = (T) cache.get(key);
+                } else {                     // 缓存的数据已经过期
+
+                    evict(key);
+                }
             }
         }
-
         return result != null ? new Record<>(Source.MEMORY, key, result, timestampMap.get(key), expireTimeMap.get(key)) : null;
     }
 
@@ -58,9 +58,9 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
     @Override
     public <T> void put(String key, T value, long expireTime) {
 
-        cache.put(key,value);
-        timestampMap.put(key,System.currentTimeMillis());
-        expireTimeMap.put(key,expireTime);
+        cache.put(key, value);
+        timestampMap.put(key, System.currentTimeMillis());
+        expireTimeMap.put(key, expireTime);
     }
 
     @Override
