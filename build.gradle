@@ -2,7 +2,7 @@
 ext {
     libraries = [
 
-            rxcache_core                    : "1.1.0"
+            rxcache_core                    : "1.2.1"
     ]
 }
 
