@@ -3,6 +3,7 @@ package com.safframework.rxcache4a.memory.impl;
 import android.support.v4.util.LruCache;
 
 import com.safframework.rxcache.config.Constant;
+import com.safframework.rxcache.domain.CacheStatistics;
 import com.safframework.rxcache.domain.Record;
 import com.safframework.rxcache.domain.Source;
 import com.safframework.rxcache.memory.impl.AbstractMemoryImpl;
@@ -91,5 +92,10 @@ public class LRUCacheImpl extends AbstractMemoryImpl {
 
         timestampMap.clear();
         expireTimeMap.clear();
+    }
+
+    public CacheStatistics getCacheStatistics() {
+
+        return new CacheStatistics((int)maxSize, cache.putCount(), cache.evictionCount(), cache.hitCount(), cache.missCount());
     }
 }
