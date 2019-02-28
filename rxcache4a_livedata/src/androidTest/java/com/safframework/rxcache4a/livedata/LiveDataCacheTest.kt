@@ -87,8 +87,6 @@ class LiveDataCacheTest {
             latch.countDown()
         }
 
-              (observer)
-
         latch.await(2, TimeUnit.SECONDS)
         return value
     }
