@@ -14,6 +14,31 @@ rxcache4a-room|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven
 
 详见：https://www.jianshu.com/p/308d503e7482
 
+# 下载:
+
+rxcache4a
+
+```groovy
+implementation 'com.safframework.rxcache4a:rxcache4a:<latest-version>'
+```
+
+rxcache4a-greenDAO
+
+```groovy
+implementation 'com.safframework.rxcache4a:rxcache4a-greenDAO:<latest-version>'
+```
+
+rxcache4a-mmkv
+
+```groovy
+implementation 'com.safframework.rxcache4a:rxcache4a-mmkv:<latest-version>'
+```
+
+rxcache4a-room
+
+```groovy
+implementation 'com.safframework.rxcache4a:rxcache4a-room:<latest-version>'
+```
 
 # 联系方式:
 
