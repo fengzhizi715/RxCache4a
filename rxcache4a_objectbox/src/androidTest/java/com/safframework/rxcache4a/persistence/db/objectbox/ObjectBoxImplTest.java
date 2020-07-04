@@ -15,7 +15,6 @@ import org.junit.runner.RunWith;
 import io.objectbox.BoxStore;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 /**
  * @FileName: com.safframework.rxcache4a.ObjectBoxImplTest
