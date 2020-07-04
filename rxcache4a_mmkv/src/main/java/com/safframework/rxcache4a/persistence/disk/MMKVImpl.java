@@ -82,6 +82,35 @@ public class MMKVImpl implements Disk {
     }
 
     @Override
+    public String getStringData(String key) {
+
+        CacheHolder holder = converter.fromJson(kv.decodeString(key),CacheHolder.class);
+
+        if (holder==null) return null;
+
+        long timestamp = holder.getTimestamp();
+        long expireTime = holder.getExpireTime();
+
+        String json = null;
+
+        if (expireTime<0) { // 缓存的数据从不过期
+
+            json = holder.getData();
+        } else {
+
+            if (timestamp + expireTime > System.currentTimeMillis()) {  // 缓存的数据还没有过期
+
+                json = holder.getData();
+            } else {        // 缓存的数据已经过期
+
+                evict(key);
+            }
+        }
+
+        return json;
+    }
+
+    @Override
     public <T> void save(String key, T value) {
         save(key, value, Constant.NEVER_EXPIRE);
     }
