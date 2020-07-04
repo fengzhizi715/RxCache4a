@@ -1,6 +1,6 @@
 package com.safframework.rxcache4a.memory.impl;
 
-import android.support.v4.util.LruCache;
+import android.util.LruCache;
 
 import com.safframework.rxcache.config.Constant;
 import com.safframework.rxcache.domain.CacheStatistics;
