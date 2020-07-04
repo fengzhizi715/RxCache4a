@@ -3,13 +3,11 @@ package com.safframework.rxcache4a.livedata
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.safframework.rxcache.RxCache
-import org.junit.Assert.*
-
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,7 +30,7 @@ class LiveDataCacheTest {
 
     @Before
     fun setUp() {
-        appContext = InstrumentationRegistry.getTargetContext()
+        appContext = androidx.test.InstrumentationRegistry.getTargetContext()
         Looper.prepare()
         handler = Handler()
     }
