@@ -8,6 +8,10 @@ ext {
     ]
 
     libraries = [
+            androidx_appcompat        : "1.1.0",
+            androidx_junit            : "1.1.1",
+            androidx_espresso         : "3.2.0",
+
             rxcache_core              : "1.7.4",
             bytekit                   : "1.2.6"
     ]
