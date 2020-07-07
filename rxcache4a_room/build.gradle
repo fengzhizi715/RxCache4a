@@ -72,7 +72,7 @@ publish{
     userOrg = 'fengzhizi715'
     groupId = 'com.safframework.rxcache4a'
     artifactId = 'rxcache4a-room'
-    publishVersion = '0.4.0'
+    publishVersion = "$rxcache4a_version"
     desc = 'RxCache(https://github.com/fengzhizi715/RxCache) for Android'
     website = 'https://github.com/fengzhizi715/RxCache4a'
 }

@@ -45,7 +45,7 @@ dependencies {
 
     implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
     implementation "com.safframework.bytekit:bytekit-core:$libs.bytekit"
-    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'org.greenrobot:greendao:3.3.0'
 }
 
 repositories {
@@ -69,7 +69,7 @@ publish{
     userOrg = 'fengzhizi715'
     groupId = 'com.safframework.rxcache4a'
     artifactId = 'rxcache4a-greenDAO'
-    publishVersion = '0.4.0'
+    publishVersion = "$rxcache4a_version"
     desc = 'RxCache(https://github.com/fengzhizi715/RxCache) for Android'
     website = 'https://github.com/fengzhizi715/RxCache4a'
 }
