@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
 def cfg = rootProject.ext.configuration // 配置
 def libs = rootProject.ext.libraries // 库
@@ -44,8 +43,8 @@ dependencies {
 
     def room_version = "2.3.0-alpha01"
 
-    implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
-    implementation "com.safframework.bytekit:bytekit-core:$libs.bytekit"
+    implementation "com.github.fengzhizi715.RxCache:core:${libs.rxcache_core}"
+    implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -53,11 +52,13 @@ dependencies {
 
 repositories {
     jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
     //加上这些
     tasks.withType(Javadoc) {
@@ -66,13 +67,4 @@ allprojects {
             links "http://docs.oracle.com/javase/7/docs/api"
         }
     }
-}
-
-publish{
-    userOrg = 'fengzhizi715'
-    groupId = 'com.safframework.rxcache4a'
-    artifactId = 'rxcache4a-room'
-    publishVersion = "$rxcache4a_version"
-    desc = 'RxCache(https://github.com/fengzhizi715/RxCache) for Android'
-    website = 'https://github.com/fengzhizi715/RxCache4a'
 }

@@ -49,7 +49,26 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
-    implementation "com.safframework.rxcache:rxcache-core:${libs.rxcache_core}"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0"
+    implementation "com.github.fengzhizi715.RxCache:core:${libs.rxcache_core}"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.4.0"
 
+}
+
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+    //加上这些
+    tasks.withType(Javadoc) {
+        options{ encoding "UTF-8"
+            charSet 'UTF-8'
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+    }
 }
