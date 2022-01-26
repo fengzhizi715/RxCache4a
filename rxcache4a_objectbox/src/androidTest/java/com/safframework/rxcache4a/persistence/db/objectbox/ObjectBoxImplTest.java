@@ -32,12 +32,10 @@ public class ObjectBoxImplTest {
     public void setUp() {
         appContext = InstrumentationRegistry.getTargetContext();
         boxStore = MyObjectBox.builder().androidContext(appContext).build();
-
     }
 
     @Test
     public void testWithObject() {
-
 
         ObjectBoxImpl impl = new ObjectBoxImpl(boxStore);
         impl.evictAll();
