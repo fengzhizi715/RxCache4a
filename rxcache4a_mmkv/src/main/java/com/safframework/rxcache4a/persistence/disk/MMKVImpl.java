@@ -11,7 +11,9 @@ import com.tencent.mmkv.MMKV;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @FileName: com.safframework.rxcache4a.persistence.disk.MMKVImpl
@@ -123,9 +125,18 @@ public class MMKVImpl implements Disk {
     }
 
     @Override
-    public List<String> allKeys() {
+    public Set<String> keySet() {
 
-        return Arrays.asList(kv.allKeys());
+        String[] list = kv.allKeys();
+
+        Set<String> result = new HashSet<>();
+
+        for (String item:list) {
+
+            result.add(item);
+        }
+
+        return result;
     }
 
     @Override
