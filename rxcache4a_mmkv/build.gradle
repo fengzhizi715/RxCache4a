@@ -42,7 +42,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:${libs.androidx_espresso}"
 
     implementation "com.github.fengzhizi715.RxCache:core:${libs.rxcache_core}"
-    implementation 'com.tencent:mmkv-static:1.2.1'
+    implementation 'com.tencent:mmkv-static:1.2.12'
 }
 
 repositories {
