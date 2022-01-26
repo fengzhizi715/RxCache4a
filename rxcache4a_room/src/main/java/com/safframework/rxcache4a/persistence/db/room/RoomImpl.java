@@ -12,7 +12,9 @@ import com.safframework.rxcache.persistence.db.DB;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import androidx.room.Room;
 
@@ -118,11 +120,11 @@ public class RoomImpl implements DB {
     }
 
     @Override
-    public List<String> allKeys() {
+    public Set<String> keySet() {
 
         List<CacheEntity> list = db.cacheEntityDao().getAll();
 
-        List<String> result = new ArrayList<>();
+        Set<String> result = new HashSet<>();
 
         for (CacheEntity entity:list) {
 
@@ -135,7 +137,7 @@ public class RoomImpl implements DB {
     @Override
     public boolean containsKey(String key) {
 
-        List<String> keys = allKeys();
+        Set<String> keys = keySet();
 
         return Preconditions.isNotBlank(keys) ? keys.contains(key) : false;
     }
