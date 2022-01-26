@@ -8,10 +8,10 @@
 
 模块|最新版本
 ---|:-------------:
-rxcache4a|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache4a/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache4a/_latestVersion)
-rxcache4a-greenDAO|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache4a-greenDAO/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache4a-greenDAO/_latestVersion)
-rxcache4a-mmkv|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache4a-mmkv/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache4a-mmkv/_latestVersion)
-rxcache4a-room|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven/rxcache4a-room/images/download.svg) ](https://bintray.com/fengzhizi715/maven/rxcache4a-room/_latestVersion)
+rxcache4a|[![](https://jitpack.io/v/fengzhizi715/RxCache4a.svg)](https://jitpack.io/#fengzhizi715/RxCache4a)
+rxcache4a-greenDAO|[![](https://jitpack.io/v/fengzhizi715/RxCache4a.svg)](https://jitpack.io/#fengzhizi715/RxCache4a)
+rxcache4a-mmkv|[![](https://jitpack.io/v/fengzhizi715/RxCache4a.svg)](https://jitpack.io/#fengzhizi715/RxCache4a)
+rxcache4a-room|[![](https://jitpack.io/v/fengzhizi715/RxCache4a.svg)](https://jitpack.io/#fengzhizi715/RxCache4a)
 
 详见：https://www.jianshu.com/p/308d503e7482
 
@@ -31,25 +31,25 @@ rxcache4a-room|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven
 rxcache4a
 
 ```groovy
-implementation 'com.safframework.rxcache4a:rxcache4a:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache4a:rxcache4a:<latest-version>'
 ```
 
 rxcache4a-greenDAO
 
 ```groovy
-implementation 'com.safframework.rxcache4a:rxcache4a-greenDAO:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache4a:rxcache4a_greenDAO:<latest-version>'
 ```
 
 rxcache4a-mmkv
 
 ```groovy
-implementation 'com.safframework.rxcache4a:rxcache4a-mmkv:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache4a:rxcache4a_mmkv:<latest-version>'
 ```
 
 rxcache4a-room
 
 ```groovy
-implementation 'com.safframework.rxcache4a:rxcache4a-room:<latest-version>'
+implementation 'com.github.fengzhizi715.RxCache4a:rxcache4a_room:<latest-version>'
 ```
 
 # 联系方式:
