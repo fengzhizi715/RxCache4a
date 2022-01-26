@@ -41,7 +41,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:${libs.androidx_junit}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${libs.androidx_espresso}"
 
-    def room_version = "2.3.0-alpha01"
+    def room_version = "2.4.1"
 
     implementation "com.github.fengzhizi715.RxCache:core:${libs.rxcache_core}"
     implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
