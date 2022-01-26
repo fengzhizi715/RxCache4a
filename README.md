@@ -2,6 +2,7 @@
 
 [![@Tony沈哲 on weibo](https://img.shields.io/badge/weibo-%40Tony%E6%B2%88%E5%93%B2-blue.svg)](http://www.weibo.com/fengzhizi715)
 [![License](https://img.shields.io/badge/license-Apache%202-lightgrey.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![](https://jitpack.io/v/fengzhizi715/RxCache4a.svg)](https://jitpack.io/#fengzhizi715/RxCache4a)
 
 # 最新版本
 
@@ -15,6 +16,17 @@ rxcache4a-room|[ ![Download](https://api.bintray.com/packages/fengzhizi715/maven
 详见：https://www.jianshu.com/p/308d503e7482
 
 # 下载:
+
+将它添加到项目的 root build.gradle 中：
+
+```groovy
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
 
 rxcache4a
 
