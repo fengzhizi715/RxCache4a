@@ -10,7 +10,9 @@ import com.safframework.rxcache.persistence.db.DB;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @FileName: com.safframework.rxcache4a.persistence.db.greendao.GreenDAOImpl
@@ -112,11 +114,11 @@ public class GreenDAOImpl implements DB {
     }
 
     @Override
-    public List<String> allKeys() {
+    public Set<String> keySet() {
 
         List<CacheEntity> list = dao.loadAll();
 
-        List<String> result = new ArrayList<>();
+        Set<String> result = new HashSet<>();
 
         for (CacheEntity entity:list) {
 
@@ -129,7 +131,7 @@ public class GreenDAOImpl implements DB {
     @Override
     public boolean containsKey(String key) {
 
-        List<String> keys = allKeys();
+        Set<String> keys = keySet();
 
         return Preconditions.isNotBlank(keys) ? keys.contains(key) : false;
     }
