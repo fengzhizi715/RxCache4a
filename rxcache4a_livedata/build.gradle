@@ -50,18 +50,18 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     implementation "com.github.fengzhizi715.RxCache:core:${libs.rxcache_core}"
-    implementation "androidx.lifecycle:lifecycle-livedata:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.3.0"
 
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
     maven { url "https://jitpack.io" }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
     }
     //加上这些
