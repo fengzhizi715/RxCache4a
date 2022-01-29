@@ -45,6 +45,10 @@ dependencies {
 
     implementation "com.github.fengzhizi715.RxCache:core:${libs.rxcache_core}"
     implementation "com.github.fengzhizi715.bytekit:core:${libs.bytekit}"
+
+    testImplementation "io.objectbox:objectbox-linux:$objectboxVersion"
+    testImplementation "io.objectbox:objectbox-macos:$objectboxVersion"
+    testImplementation "io.objectbox:objectbox-windows:$objectboxVersion"
 }
 
 repositories {

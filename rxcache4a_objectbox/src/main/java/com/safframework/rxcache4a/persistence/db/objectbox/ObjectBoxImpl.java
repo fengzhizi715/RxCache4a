@@ -44,7 +44,8 @@ public class ObjectBoxImpl implements DB {
     @Override
     public <T> Record<T> retrieve(String key, Type type) {
 
-        CacheEntity entity = cacheEntityBox.query().equal(CacheEntity_.key, key).build().findUnique();
+//        CacheEntity entity = cacheEntityBox.query().equal(CacheEntity_.key, key).build().findUnique();
+        CacheEntity entity = cacheEntityBox.query(CacheEntity_.key.equal(key)).build().findUnique();
 
         if (entity==null) return null;
 
@@ -76,7 +77,8 @@ public class ObjectBoxImpl implements DB {
     @Override
     public String getStringData(String key) {
 
-        CacheEntity entity = cacheEntityBox.query().equal(CacheEntity_.key, key).build().findUnique();
+//        CacheEntity entity = cacheEntityBox.query().equal(CacheEntity_.key, key).build().findUnique();
+        CacheEntity entity = cacheEntityBox.query(CacheEntity_.key.equal(key)).build().findUnique();
 
         if (entity==null) return null;
 
@@ -145,7 +147,8 @@ public class ObjectBoxImpl implements DB {
     @Override
     public void evict(String key) {
 
-        CacheEntity entity = cacheEntityBox.query().equal(CacheEntity_.key, key).build().findUnique();
+//        CacheEntity entity = cacheEntityBox.query().equal(CacheEntity_.key, key).build().findUnique();
+        CacheEntity entity = cacheEntityBox.query(CacheEntity_.key.equal(key)).build().findUnique();
 
         if (entity!=null) {
 
